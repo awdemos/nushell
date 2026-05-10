@@ -1,0 +1,152 @@
+[package]
+authors = ["The Nushell Project Developers"]
+description = "Nushell's built-in commands"
+edition = "2021"
+license = "MIT"
+name = "nu-command"
+repository = "https://github.com/nushell/nushell/tree/main/crates/nu-command"
+version = "0.99.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+bench = false
+
+[lints]
+workspace = true
+
+[dependencies]
+nu-cmd-base = { path = "../nu-cmd-base", version = "0.99.2" }
+nu-color-config = { path = "../nu-color-config", version = "0.99.2" }
+nu-engine = { path = "../nu-engine", version = "0.99.2" }
+nu-glob = { path = "../nu-glob", version = "0.99.2" }
+nu-json = { path = "../nu-json", version = "0.99.2" }
+nu-parser = { path = "../nu-parser", version = "0.99.2" }
+nu-path = { path = "../nu-path", version = "0.99.2" }
+nu-pretty-hex = { path = "../nu-pretty-hex", version = "0.99.2" }
+nu-protocol = { path = "../nu-protocol", version = "0.99.2" }
+nu-system = { path = "../nu-system", version = "0.99.2" }
+nu-table = { path = "../nu-table", version = "0.99.2" }
+nu-term-grid = { path = "../nu-term-grid", version = "0.99.2" }
+nu-utils = { path = "../nu-utils", version = "0.99.2" }
+nu-ansi-term = { workspace = true }
+nuon = { path = "../nuon", version = "0.99.2" }
+
+alphanumeric-sort = { workspace = true }
+base64 = { workspace = true }
+bracoxide = { workspace = true }
+brotli = { workspace = true }
+byteorder = { workspace = true }
+bytesize = { workspace = true }
+calamine = { workspace = true, features = ["dates"] }
+chardetng = { workspace = true }
+chrono = { workspace = true, features = ["std", "unstable-locales", "clock"], default-features = false }
+chrono-humanize = { workspace = true }
+chrono-tz = { workspace = true }
+crossterm = { workspace = true }
+csv = { workspace = true }
+dialoguer = { workspace = true, default-features = false, features = ["fuzzy-select"] }
+digest = { workspace = true, default-features = false }
+dtparse = { workspace = true }
+encoding_rs = { workspace = true }
+fancy-regex = { workspace = true }
+filesize = { workspace = true }
+filetime = { workspace = true }
+human-date-parser = { workspace = true }
+indexmap = { workspace = true }
+indicatif = { workspace = true }
+itertools = { workspace = true }
+log = { workspace = true }
+lscolors = { workspace = true, default-features = false, features = ["nu-ansi-term"] }
+md5 = { workspace = true }
+mime = { workspace = true }
+mime_guess = { workspace = true }
+multipart-rs = { workspace = true }
+native-tls = { workspace = true }
+notify-debouncer-full = { workspace = true, default-features = false }
+num-format = { workspace = true }
+num-traits = { workspace = true }
+oem_cp = { workspace = true }
+open = { workspace = true }
+os_pipe = { workspace = true }
+pathdiff = { workspace = true }
+percent-encoding = { workspace = true }
+print-positions = { workspace = true }
+quick-xml = { workspace = true }
+rand = { workspace = true }
+rayon = { workspace = true }
+regex = { workspace = true }
+roxmltree = { workspace = true }
+rusqlite = { workspace = true, features = ["bundled", "backup", "chrono"], optional = true }
+rmp = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, features = ["preserve_order"] }
+serde_urlencoded = { workspace = true }
+serde_yaml = { workspace = true }
+sha2 = { workspace = true }
+sysinfo = { workspace = true }
+tabled = { workspace = true, features = ["ansi"], default-features = false }
+terminal_size = { workspace = true }
+titlecase = { workspace = true }
+toml = { workspace = true, features = ["preserve_order"] }
+unicode-segmentation = { workspace = true }
+ureq = { workspace = true, default-features = false, features = ["charset", "gzip", "json", "native-tls"] }
+url = { workspace = true }
+uu_cp = { workspace = true }
+uu_mkdir = { workspace = true }
+uu_mktemp = { workspace = true }
+uu_mv = { workspace = true }
+uu_uname = { workspace = true }
+uu_whoami = { workspace = true }
+uuid = { workspace = true, features = ["v4"] }
+v_htmlescape = { workspace = true }
+wax = { workspace = true }
+which = { workspace = true }
+unicode-width = { workspace = true }
+data-encoding = { version = "2.6.0", features = ["alloc"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = { workspace = true }
+
+[target.'cfg(not(windows))'.dependencies]
+uucore = { workspace = true, features = ["mode"] }
+
+[target.'cfg(unix)'.dependencies]
+umask = { workspace = true }
+nix = { workspace = true, default-features = false, features = ["user", "resource", "pthread"] }
+
+[target.'cfg(any(target_os = "linux", target_os = "android"))'.dependencies]
+procfs = { workspace = true }
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies.trash]
+optional = true
+workspace = true
+
+[target.'cfg(windows)'.dependencies.windows]
+features = [
+	"Win32_Foundation",
+	"Win32_Storage_FileSystem",
+	"Win32_System_Environment",
+	"Win32_System_SystemServices",
+	"Win32_Security",
+	"Win32_System_Threading",
+]
+workspace = true
+
+[features]
+plugin = ["nu-parser/plugin"]
+sqlite = ["rusqlite"]
+trash-support = ["trash"]
+
+[dev-dependencies]
+nu-cmd-lang = { path = "../nu-cmd-lang", version = "0.99.2" }
+nu-test-support = { path = "../nu-test-support", version = "0.99.2" }
+
+dirs = { workspace = true }
+mockito = { workspace = true, default-features = false }
+quickcheck = { workspace = true }
+quickcheck_macros = { workspace = true }
+rstest = { workspace = true, default-features = false }
+pretty_assertions = { workspace = true }
+tempfile = { workspace = true }
+rand_chacha = { workspace = true }
